@@ -1,0 +1,109 @@
+# Spring Boot Backend .gitignore
+
+# Compiled class files
+*.class
+
+# Build directories
+/target/
+/build/
+/out/
+/bin/
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+/out/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Spring Boot
+*.pid
+*.pid.lock
+
+# Application properties with secrets
+application-local.properties
+application-dev.properties
+application-prod.properties
+
+# Log files
+*.log
+logs/
+log/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.temp/
+tmp/
+
+# H2 Database files
+*.db
+*.mv.db
+*.trace.db
+
+# Environment files
+.env
+.env.local
+
+# LaTeX temporary files (for PDF generation)
+*.aux
+*.log
+*.pdf
+*.synctex.gz
+*.out
+*.toc
+
+# Keep test PDFs
+!src/test/resources/*.pdf
