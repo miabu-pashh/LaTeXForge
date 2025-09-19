@@ -1,0 +1,332 @@
+/* === Overlay === */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* === Modal Container (flex column so footer is always visible) === */
+.modal {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 90%;
+  max-width: 900px;
+  max-height: 95vh; /* keep inside viewport */
+  border-radius: 10px;
+  overflow: hidden; /* hide any overflow edges */
+  font-family: Google Sans, Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
+}
+
+/* === Header === */
+.modal-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #dadce0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  flex: 0 0 auto;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #5f6368;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+.close-button:hover {
+  background-color: #f1f3f4;
+}
+
+/* === Scrollable Content (flex:1; sticky footer stays visible) === */
+.modal-content {
+  flex: 1 1 auto; /* take remaining height */
+  min-height: 0; /* allow child overflow scrolling */
+  padding: 24px;
+  overflow: auto; /* scroll only the middle section */
+}
+
+/* Grid */
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* Sections */
+.modal-section {
+  margin-bottom: 24px;
+}
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3c4043;
+  margin: 0 0 12px 0;
+}
+
+/* Inputs */
+.modal-input,
+.modal-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+  background: #fff;
+}
+.modal-input:focus,
+.modal-textarea:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+}
+.modal-textarea {
+  font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.input-grid {
+  display: grid;
+  gap: 12px;
+}
+.contact-inputs {
+  margin-bottom: 16px;
+}
+
+/* Buttons */
+.modal-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.05s ease, background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+.modal-button:active {
+  transform: translateY(1px);
+}
+
+.primary-button {
+  background-color: #1a73e8;
+  color: #fff;
+}
+.primary-button:hover:not(.disabled) {
+  background-color: #1557b0;
+}
+
+.secondary-button {
+  background-color: #f8f9fa;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+}
+.secondary-button:hover {
+  background-color: #f1f3f4;
+}
+
+.success-button {
+  background-color: #137333;
+  color: #fff;
+}
+.success-button:hover:not(.disabled) {
+  background-color: #0f5d28;
+}
+
+.modal-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Remove buttons */
+.remove-button {
+  background-color: transparent;
+  color: #d93025;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.remove-button:hover {
+  background-color: #fce8e6;
+  border-color: #fad2cf;
+}
+
+/* Contact List */
+.contact-list {
+  max-height: 220px;
+  overflow: auto;
+}
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #f8f9fa;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border: 1px solid #e8eaed;
+}
+.contact-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #202124;
+}
+.contact-email {
+  font-size: 12px;
+  color: #5f6368;
+}
+
+/* Email Editor */
+.email-field {
+  margin-bottom: 16px;
+}
+.field-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3c4043;
+}
+
+/* Tip */
+.tip {
+  font-size: 12px;
+  color: #5f6368;
+  margin-top: 8px;
+  padding: 12px;
+  background-color: #e8f0fe;
+  border-radius: 8px;
+  border: 1px solid #d2e3fc;
+}
+
+/* File Attachments */
+.file-input {
+  margin-bottom: 12px;
+}
+.file-help {
+  font-size: 12px;
+  color: #5f6368;
+  margin-bottom: 16px;
+}
+
+.attachment-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3c4043;
+  margin: 0 0 12px 0;
+}
+.attachment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: #f8f9fa;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  border: 1px solid #e8eaed;
+}
+.attachment-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: #202124;
+}
+.attachment-size {
+  font-size: 11px;
+  color: #5f6368;
+}
+
+/* Email Preview */
+.email-preview {
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  font-size: 13px;
+}
+.preview-field {
+  margin-bottom: 12px;
+}
+.preview-body {
+  white-space: pre-line;
+  max-height: 140px;
+  overflow: auto;
+}
+.preview-note {
+  margin-top: 12px;
+  font-size: 11px;
+  color: #5f6368;
+  font-style: italic;
+}
+
+/* === Sticky Footer (always visible) === */
+.modal-footer {
+  position: sticky; /* sticks to bottom within modal */
+  bottom: 0;
+  z-index: 1;
+  padding: 12px 24px;
+  border-top: 1px solid #dadce0;
+  background-color: #fff; /* ensure it's readable over content */
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+/* === Responsive === */
+@media (max-width: 1024px) {
+  .modal {
+    width: 94%;
+  }
+}
+@media (max-width: 768px) {
+  .modal {
+    width: 95%;
+    max-height: 98vh;
+  }
+  .modal-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .modal-content {
+    padding: 16px;
+  }
+  .modal-header,
+  .modal-footer {
+    padding: 12px 16px;
+  }
+}
+@media (max-width: 480px) {
+  .modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .modal-button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,392 @@
+/* CoverLetterGeneration.css - Matching Resume Generation UI */
+body,
+html {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Header - Same as Resume Generation */
+.cl-header {
+  background-color: #4cc1ec;
+  color: black;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.cl-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.cl-header p {
+  margin: 0.3rem 0 0;
+  font-size: 1rem;
+}
+
+.cl-header button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  background: white;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.cl-header button:hover {
+  background: #f0f0f0;
+}
+
+/* Main Container */
+.cover-letter-container {
+  display: flex;
+  height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+/* Left Panel: Field List */
+.cl-left-panel {
+  width: 20%;
+  background: #121212;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid #333;
+}
+
+.cl-left-panel h2 {
+  font-size: 1.5rem;
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: "Inter", sans-serif;
+}
+
+.field-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.field-list li {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  transition: background 0.2s;
+}
+
+.field-list li:hover,
+.field-list li.active {
+  background-color: #4cc1ec;
+  color: #000;
+}
+
+/* Generate/Home buttons */
+.cl-left-panel .generate-btn {
+  padding: 0.75rem;
+  margin-top: 3rem;
+  border: none;
+  background: #4cc1ec;
+  color: #000;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 60%;
+  align-self: center;
+}
+
+.cl-left-panel .generate-btn:hover {
+  background-color: #00c695;
+}
+
+.cl-left-panel .generate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cl-left-panel .generate-btn:first-of-type {
+  margin-top: auto;
+  margin-bottom: 1rem;
+}
+
+.cl-left-panel .generate-btn:last-of-type {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+/* Middle Panel: Editor */
+.cl-middle-panel {
+  width: 40%;
+  background: #000;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+}
+
+.cl-middle-panel h2 {
+  margin-bottom: 0.75rem;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.cl-middle-panel textarea,
+.cl-middle-panel input {
+  width: 80%;
+  font-family: "Inter", sans-serif;
+  padding: 1rem;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin: 1rem auto;
+  background: #caf0f8;
+  display: block;
+}
+
+.cl-middle-panel textarea {
+  height: 70%;
+  resize: vertical;
+  font-family: monospace;
+}
+
+.cl-middle-panel input {
+  height: 50px;
+}
+
+/* Right Panel: PDF Preview */
+.cl-right-panel {
+  width: 40%;
+  padding: 1rem;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.cl-right-panel h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.cl-right-panel iframe {
+  flex: 1;
+  width: 100%;
+  height: calc(100% - 3rem);
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* PDF Actions */
+.pdf-actions {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.pdf-actions .action-btn {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #4cc1ec;
+  color: #000;
+  transition: background 0.2s;
+}
+
+.pdf-actions .action-btn:hover {
+  background: #00c695;
+}
+
+/* No Preview State */
+.no-preview {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.no-preview p {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.no-preview .preview-hint {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+/* Status Messages */
+.status {
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto;
+  text-align: center;
+  width: 80%;
+  border-radius: 4px;
+}
+
+.status.success {
+  color: #00c695;
+  background: rgba(0, 198, 149, 0.1);
+}
+
+.status.error {
+  color: #ff4444;
+  background: rgba(255, 68, 68, 0.1);
+}
+
+.status.info {
+  color: #4cc1ec;
+  background: rgba(76, 193, 236, 0.1);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.loading-spinner {
+  border: 4px solid #ccc;
+  border-top: 4px solid #4cc1ec;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-overlay p {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .cover-letter-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .cl-left-panel,
+  .cl-middle-panel,
+  .cl-right-panel {
+    width: 100%;
+    min-height: 400px;
+  }
+
+  .cl-left-panel {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
+  .field-list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .field-list li {
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+  }
+
+  .cl-left-panel .generate-btn {
+    width: auto;
+    margin: 0.5rem;
+    padding: 0.75rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cl-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .cl-header p {
+    font-size: 0.9rem;
+  }
+
+  .cl-header button {
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .cl-left-panel h2,
+  .cl-middle-panel h2,
+  .cl-right-panel h2 {
+    font-size: 1.2rem;
+  }
+
+  .cl-middle-panel textarea,
+  .cl-middle-panel input {
+    width: 90%;
+    font-size: 0.9rem;
+  }
+
+  .pdf-actions {
+    justify-content: center;
+  }
+}
+
+.cl-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cl-preview-header h2 {
+  margin: 0;
+}
+
+.cl-preview-header .action-btn {
+  padding: 8px 12px;
+  background-color: #00bfff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.cl-preview-header .action-btn:hover {
+  background-color: #00a7d6;
+}

@@ -1,0 +1,45 @@
+/* src/styles/WelcomePage.css */
+.welcome-container {
+  text-align: center;
+  padding-top: 100px;
+  font-family: "Arial", sans-serif;
+  background: #e0afa0;
+  height: 100vh;
+}
+
+h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.sub-heading {
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+
+.main-heading {
+  font-size: 48px;
+  font-family: "Brush Script MT", cursive;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+
+.hunt-button {
+  background: #d6ccff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Cursive";
+  text-shadow: 0 0 8px #b4aaff;
+  transition: transform 0.2s ease;
+}
+
+.hunt-button:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,83 @@
+.ats-container {
+    margin-top: 3rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fefefe;
+  /* background: pink; */
+}
+
+.ats-header {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ats-textarea {
+  width: 100%;
+  background: pink;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  resize: vertical;
+}
+
+.ats-button {
+  padding: 0.7rem 1.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #007acc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ats-button:hover {
+  background: #005fa3;
+}
+
+.ats-result-box {
+  background: #eaffea;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-radius: 10px;
+  border: 1px solid #b6f2b6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ats-section-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #2a5f2e;
+}
+
+.ats-summary {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.ats-list {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.ats-list li {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
