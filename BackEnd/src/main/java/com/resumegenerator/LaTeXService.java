@@ -35,7 +35,10 @@ public class LaTeXService {
         try {
             // Step 2: Copy template files to temp directory
             copyTemplateFiles(tempDir);
-            
+            System.out.println("📂 Copied template files to temp directory");
+
+            System.out.println("📂 temp directory is: " + tempDir);
+            System.out.println("📂 user data is: " + userData);
             // Step 3: Replace placeholders with user data
             String processedTemplate = processTemplate(userData);
             
@@ -273,4 +276,90 @@ public class LaTeXService {
         
         System.out.println("✅ Cover letter PDF generation completed successfully");
     }
+    /**
+ * Generate Why I Fit PDF from complete LaTeX content
+ */
+public byte[] generateWhyIFitDocument(Map<String, String> userData) throws Exception {
+    
+    // Step 1: Create temporary directory for processing
+    Path tempDir = createTempDirectory();
+    System.out.println("📁 Created temp directory for Why I Fit: " + tempDir);
+    
+    try {
+        // Step 2: Get the final LaTeX content (no template processing needed)
+        String finalLatexContent = userData.get("FINAL_LATEX_CONTENT");
+        
+        if (finalLatexContent == null || finalLatexContent.trim().isEmpty()) {
+            throw new IllegalArgumentException("FINAL_LATEX_CONTENT is required");
+        }
+        
+        // Step 3: Write LaTeX content to temp directory
+        Path texFile = tempDir.resolve("why-i-fit.tex");
+        Files.write(texFile, finalLatexContent.getBytes());
+        System.out.println("📝 Created Why I Fit .tex file");
+        
+        // Step 4: Generate PDF using LaTeX
+        generateWhyIFitPDF(tempDir);
+        
+        // Step 5: Read the generated PDF
+        Path pdfFile = tempDir.resolve("why-i-fit.pdf");
+        byte[] pdfBytes = Files.readAllBytes(pdfFile);
+        System.out.println("✅ Why I Fit PDF generated successfully! Size: " + pdfBytes.length + " bytes");
+        
+        return pdfBytes;
+        
+    } finally {
+        // Step 6: Clean up temporary files
+        cleanupTempDirectory(tempDir);
+    }
+}
+
+/**
+ * Generate PDF for Why I Fit using pdflatex command
+ */
+private void generateWhyIFitPDF(Path tempDir) throws IOException, InterruptedException {
+    System.out.println("🔧 Starting Why I Fit PDF generation...");
+    
+    // Build the pdflatex command
+    ProcessBuilder processBuilder = new ProcessBuilder(
+        "pdflatex", 
+        "-interaction=nonstopmode", // Don't stop for errors
+        "-output-directory=" + tempDir.toString(),
+        "why-i-fit.tex"
+    );
+    
+    processBuilder.directory(tempDir.toFile());
+    processBuilder.redirectErrorStream(true); // Combine stdout and stderr
+    
+    // Execute the command
+    Process process = processBuilder.start();
+    
+    // Capture output for debugging
+    StringBuilder output = new StringBuilder();
+    try (BufferedReader reader = new BufferedReader(
+            new InputStreamReader(process.getInputStream()))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            output.append(line).append("\n");
+        }
+    }
+    
+    // Wait for completion
+    int exitCode = process.waitFor();
+    
+    // Check if PDF was actually created
+    Path pdfFile = tempDir.resolve("why-i-fit.pdf");
+    if (!Files.exists(pdfFile)) {
+        System.err.println("❌ Why I Fit LaTeX compilation failed with exit code: " + exitCode);
+        System.err.println("Output: " + output.toString());
+        throw new RuntimeException("Why I Fit PDF generation failed - no PDF file created");
+    }
+    
+    if (exitCode != 0) {
+        System.out.println("⚠️ LaTeX reported warnings (exit code: " + exitCode + ") but PDF was created");
+        System.out.println("Output: " + output.toString());
+    }
+    
+    System.out.println("✅ Why I Fit PDF generation completed successfully");
+}
 }

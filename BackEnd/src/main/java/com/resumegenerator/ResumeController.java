@@ -6,6 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.resumegenerator.model.WhyIFitRequest;
+import com.resumegenerator.model.WhyIFitResponse;
+import com.resumegenerator.service.WhyIFitService;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +30,9 @@ public class ResumeController {
 
     @Autowired
     private LaTeXService laTeXService;
+
+    @Autowired
+    private WhyIFitService whyIFitService;
 
     /**
      * Generate resume PDF from user data
@@ -238,7 +246,66 @@ public class ResumeController {
             return new ResponseEntity<>(
                 "Error generating cover letter".getBytes(), 
                 HttpStatus.INTERNAL_SERVER_ERROR
-            );
+            );}
         }
+        @PostMapping("/why-i-fit/generate")
+public ResponseEntity<Map<String, Object>> generateWhyIFitLatex(@RequestBody Map<String, String> inputData) {
+    try {
+        // Build request object from raw input
+        WhyIFitRequest request = new WhyIFitRequest();
+        request.setCompanyName(inputData.get("companyName"));
+        request.setCandidateName(inputData.get("candidateName"));
+        request.setCandidateEmail(inputData.get("candidateEmail"));
+        request.setJobDescription(inputData.get("jobDescription"));
+
+        // Extract Gemini output string
+        String geminiOutput = inputData.get("geminiOutput");
+
+        // Call the service to generate the LaTeX content
+        WhyIFitResponse response = whyIFitService.generateWhyIFitDocument(request, geminiOutput);
+
+        return ResponseEntity.ok(Map.of(
+            "status", "success",
+            "data", Map.of("finalLatexContent", response.getFinalLatexContent())
+        ));
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(500).body(Map.of(
+            "status", "error",
+            "message", "Failed to generate Why I Fit LaTeX"
+        ));
     }
+}
+/**
+ * Generate Why I Fit PDF from LaTeX content
+ * POST /api/resume/generate-why-i-fit-pdf
+ */
+@PostMapping("/generate-why-i-fit-pdf")
+public ResponseEntity<byte[]> generateWhyIFitPDF(@RequestBody Map<String, String> requestData) {
+    try {
+        System.out.println("📨 Received Why I Fit PDF generation request");
+        System.out.println("📋 Request data keys: " + requestData.keySet());
+        
+        // Generate PDF using LaTeX service
+        byte[] pdfBytes = laTeXService.generateWhyIFitDocument(requestData);
+        
+        // Prepare HTTP headers for PDF download
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "why-i-fit-document.pdf");
+        headers.setContentLength(pdfBytes.length);
+        
+        System.out.println("✅ Why I Fit PDF generated successfully!");
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+        
+    } catch (Exception e) {
+        System.err.println("❌ Error generating Why I Fit PDF: " + e.getMessage());
+        e.printStackTrace();
+        return new ResponseEntity<>("PDF generation failed".getBytes(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
+//not to me, I have added the code end point of why i fit in this controler but the claude ai was giving me different service files. so tommorw ask clause ai , give it theb
+//serviee file that we created and other cotroer methods so that it can udeerstand better.
 }
