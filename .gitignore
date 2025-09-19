@@ -76,4 +76,4 @@ lerna-debug.log*
 *.pdfsync
 *.nav
 *.snm
-*.vrb
+*.vrbBackEnd/src/main/resources/application.properties
